@@ -1,19 +1,26 @@
 package com.cibertec.pi.rest.controller;
 
+import com.cibertec.pi.rest.request.LoginRequest;
+import com.cibertec.pi.rest.request.RegisterRequest;
+import com.cibertec.pi.rest.service.OnboardingService;
 import com.cibertec.pi.util.GenericBean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-
 public class OboardingController {
+
+    @Autowired
+    private OnboardingService onboardingService;
 
     @Operation(summary = "Login")
     @ApiResponses({
@@ -21,8 +28,8 @@ public class OboardingController {
             @ApiResponse(responseCode = "400", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = GenericBean.class))})
     })
     @PostMapping("/login")
-    public ResponseEntity login() {
-        return null;
+    public ResponseEntity login(@RequestBody LoginRequest loginRequest) {
+        return onboardingService.login(loginRequest);
     }
 
     @Operation(summary = "Registro")
@@ -31,7 +38,7 @@ public class OboardingController {
             @ApiResponse(responseCode = "400", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = GenericBean.class))})
     })
     @PostMapping("/register")
-    public ResponseEntity register() {
-        return null;
+    public ResponseEntity register(@RequestBody RegisterRequest registerRequest) {
+        return onboardingService.register(registerRequest);
     }
 }
