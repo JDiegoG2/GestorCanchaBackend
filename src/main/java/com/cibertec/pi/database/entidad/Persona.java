@@ -1,13 +1,11 @@
 package com.cibertec.pi.database.entidad;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Table(name = "persona")
+
 @Data
 public class Persona {
     @Id
@@ -25,6 +23,11 @@ public class Persona {
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "direccion")
+    private String direccion;
+
+
 
     public String getNombreCompleto() {
         return String.format("%s %s", nombres, apellidos);
