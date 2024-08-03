@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterRequest {
-    @JsonProperty("username")
-    private String username;
 
     @JsonProperty("password")
     private String password;

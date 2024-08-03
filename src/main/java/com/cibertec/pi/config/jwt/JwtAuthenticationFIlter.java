@@ -1,4 +1,4 @@
-package com.cibertec.pi.JWT;
+package com.cibertec.pi.config.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -2,6 +2,7 @@ package com.cibertec.pi.rest.controller;
 
 import com.cibertec.pi.rest.request.LoginRequest;
 import com.cibertec.pi.rest.request.RegisterRequest;
+import com.cibertec.pi.rest.response.AuthResponse;
 import com.cibertec.pi.rest.service.OnboardingService;
 import com.cibertec.pi.util.GenericBean;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +25,7 @@ public class OboardingController {
 
     @Operation(summary = "Login")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Object.class))}),
+            @ApiResponse(responseCode = "200", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = AuthResponse.class))}),
             @ApiResponse(responseCode = "400", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = GenericBean.class))})
     })
     @PostMapping("/login")
@@ -32,9 +33,9 @@ public class OboardingController {
         return onboardingService.login(loginRequest);
     }
 
-    @Operation(summary = "Registro")
+    @Operation(summary = "Registro de Cliente")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Object.class))}),
+            @ApiResponse(responseCode = "200", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = GenericBean.class))}),
             @ApiResponse(responseCode = "400", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = GenericBean.class))})
     })
     @PostMapping("/register")

@@ -1,6 +1,6 @@
 package com.cibertec.pi.config;
 
-import com.cibertec.pi.database.repository.UsuarioRepository;
+import com.cibertec.pi.database.repository.ClienteRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class AplicationConfig {
 
-    private final UsuarioRepository userRepository;
+    private final ClienteRepository userRepository;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {

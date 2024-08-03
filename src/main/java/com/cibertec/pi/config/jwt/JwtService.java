@@ -1,6 +1,5 @@
-package com.cibertec.pi.JWT;
+package com.cibertec.pi.config.jwt;
 
-import com.cibertec.pi.database.entidad.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

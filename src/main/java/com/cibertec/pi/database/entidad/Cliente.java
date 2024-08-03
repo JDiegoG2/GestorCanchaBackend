@@ -1,5 +1,6 @@
 package com.cibertec.pi.database.entidad;
 
+import com.cibertec.pi.constant.RoleEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,8 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "usuario")
-public class Usuario implements UserDetails {
+@Table(name = "cliente")
+public class Cliente implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +30,8 @@ public class Usuario implements UserDetails {
     private String contrasena;
 
     @Enumerated(EnumType.STRING)
-    Role role;
+    @Column(name = "role")
+    private RoleEnum role;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "persona_id")
