@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +28,8 @@ public class CanchaController {
             @ApiResponse(responseCode = "200", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = CanchaResponse.class))}),
             @ApiResponse(responseCode = "400", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = GenericBean.class))})
     })
-    @PostMapping
-    public ResponseEntity crearCancha(@RequestBody CrearCanchaRequest request) {
+    @PostMapping("/guardar")
+    public ResponseEntity crearCancha(@Valid @RequestBody CrearCanchaRequest request) {
         return canchaService.crearCancha(request);
     }
 
@@ -42,13 +43,23 @@ public class CanchaController {
         return canchaService.getById(id);
     }
 
+    @Operation(summary = "Consultar Cancha")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = CanchaResponse.class))}),
+            @ApiResponse(responseCode = "400", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = GenericBean.class))})
+    })
+    @GetMapping("/listar")
+    public ResponseEntity listar() {
+        return canchaService.listarCancha();
+    }
+
     @Operation(summary = "actualizar Cancha")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = CanchaResponse.class))}),
             @ApiResponse(responseCode = "400", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = GenericBean.class))})
     })
     @PatchMapping("/{id}")
-    public ResponseEntity actualizarCancha(@PathVariable("id") Long id, @RequestBody CrearCanchaRequest request) {
+    public ResponseEntity actualizarCancha(@PathVariable("id") Long id, @Valid @RequestBody CrearCanchaRequest request) {
         return canchaService.actualizarCancha(id, request);
     }
 
