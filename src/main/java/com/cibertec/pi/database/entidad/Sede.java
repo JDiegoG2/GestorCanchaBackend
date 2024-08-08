@@ -16,7 +16,6 @@ public class Sede {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @Column(name = "nombre")
@@ -25,12 +24,8 @@ public class Sede {
     @Column(name = "direccion")
     private String direccion;
 
-    @Column(name = "distrito")
-    private String distrito;
-
     @Column(name = "telefono")
     private String telefono;
 
-    @Column(name = "estado")
-    private Boolean estado;
+
 }
