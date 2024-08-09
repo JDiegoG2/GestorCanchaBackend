@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -30,10 +32,10 @@ public class CanchaResponse {
     private Long sedeId;
 
     @JsonProperty("dis_hr_inicio")
-    private Integer disHrInicio;
+    private LocalTime disHrInicio;
 
     @JsonProperty("dis_hr_fin")
-    private Integer disHrFin;
+    private LocalTime disHrFin;
 
     public CanchaResponse(Cancha cancha) {
         this.id = cancha.getId();

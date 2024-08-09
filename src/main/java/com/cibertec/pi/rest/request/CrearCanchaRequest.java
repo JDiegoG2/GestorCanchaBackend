@@ -11,6 +11,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -38,11 +40,11 @@ public class CrearCanchaRequest {
     @Min(value = 0, message = "Valor minimo debe ser 0")
     @Max(value = 24, message = "Valor maximo no debe ser mayor a 24")
     @JsonProperty("dis_hr_inicio")
-    private Integer disHrInicio;
+    private LocalTime disHrInicio;
 
     @NotNull(message = "Debe ingresar la hora de fin")
     @Min(value = 0, message = "Valor minimo debe ser 0")
     @Max(value = 24, message = "Valor maximo no debe ser mayor a 24")
     @JsonProperty("dis_hr_fin")
-    private Integer disHrFin;
+    private LocalTime disHrFin;
 }
