@@ -26,7 +26,7 @@ public class CanchaService {
         if (canchaRepository.findByNumero(request.getNumero()) != null) {
             return _Respuestas.getErrorResult("El numero de cancha ya existe");
         }
-        if (request.getDisHrInicio().equals(request.getDisHrFin()) || request.getDisHrInicio().isAfter(request.getDisHrFin())) {
+        if (request.getDisHrInicio().equals(request.getDisHrFin()) || request.getDisHrInicio() > request.getDisHrFin()) {
             return _Respuestas.getErrorResult("Las horas de disponibilidad estan mal ingresadas");
         }
 

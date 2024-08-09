@@ -40,11 +40,11 @@ public class CrearCanchaRequest {
     @Min(value = 0, message = "Valor minimo debe ser 0")
     @Max(value = 24, message = "Valor maximo no debe ser mayor a 24")
     @JsonProperty("dis_hr_inicio")
-    private LocalTime disHrInicio;
+    private Integer disHrInicio;
 
     @NotNull(message = "Debe ingresar la hora de fin")
     @Min(value = 0, message = "Valor minimo debe ser 0")
     @Max(value = 24, message = "Valor maximo no debe ser mayor a 24")
     @JsonProperty("dis_hr_fin")
-    private LocalTime disHrFin;
+    private Integer disHrFin;
 }

@@ -1,7 +1,6 @@
 package com.cibertec.pi.rest.controller;
 
 
-import com.cibertec.pi.config.ResourceNotFoundException;
 import com.cibertec.pi.database.entidad.Sede;
 import com.cibertec.pi.rest.service.SedeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,10 +39,8 @@ public class SedeController {
             @ApiResponse(responseCode = "200", description = "Sede encontrada", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Sede.class))}),
             @ApiResponse(responseCode = "404", description = "Sede no encontrada", content = @Content)
     })
-    public ResponseEntity<Sede> obtener(@PathVariable Long id) {
-        Sede sede = sedeService.getSede(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Sede no encontrada con id: " + id));
-        return ResponseEntity.ok(sede);
+    public ResponseEntity obtener(@PathVariable Long id) {
+        return sedeService.getSede(id);
     }
 
     @PostMapping("/guardar")
@@ -64,14 +61,8 @@ public class SedeController {
             @ApiResponse(responseCode = "404", description = "Sede no encontrada", content = @Content)
     })
     public ResponseEntity<Sede> actualizar(@PathVariable Long id, @RequestBody Sede sedeDetalles) {
-        Sede sede = sedeService.getSede(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Sede no encontrada con id: " + id));
 
-        sede.setNombre(sedeDetalles.getNombre());
-        // actualizar otros campos necesarios
-
-        final Sede sedeActualizada = sedeService.save(sede);
-        return ResponseEntity.ok(sedeActualizada);
+        return sedeService.update(id, sedeDetalles);
     }
 
     @DeleteMapping("/{id}")
@@ -81,10 +72,6 @@ public class SedeController {
             @ApiResponse(responseCode = "404", description = "Sede no encontrada", content = @Content)
     })
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        Sede sede = sedeService.getSede(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Sede no encontrada con id: " + id));
-
-        sedeService.delete(sede);
-        return ResponseEntity.ok().build();
+        return sedeService.delete(id);
     }
 }

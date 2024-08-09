@@ -37,10 +37,10 @@ public class Cancha {
     private Sede sede;
 
     @Column(name = "dis_hr_inicio")
-    private LocalTime disHrInicio;
+    private Integer disHrInicio;
 
     @Column(name = "dis_hr_fin")
-    private LocalTime disHrFin;
+    private Integer disHrFin;
 
     @Column(name = "estado")
     private Boolean estado;

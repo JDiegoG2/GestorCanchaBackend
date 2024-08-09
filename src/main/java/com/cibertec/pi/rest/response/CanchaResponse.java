@@ -32,10 +32,10 @@ public class CanchaResponse {
     private Long sedeId;
 
     @JsonProperty("dis_hr_inicio")
-    private LocalTime disHrInicio;
+    private Integer disHrInicio;
 
     @JsonProperty("dis_hr_fin")
-    private LocalTime disHrFin;
+    private Integer disHrFin;
 
     public CanchaResponse(Cancha cancha) {
         this.id = cancha.getId();
