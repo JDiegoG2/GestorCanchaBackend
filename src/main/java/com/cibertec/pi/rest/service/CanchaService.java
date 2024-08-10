@@ -32,6 +32,7 @@ public class CanchaService {
 
 
         Cancha cancha = new Cancha();
+        cancha.setTipoCancha(request.getTipoCancha());
         cancha.setNumero(request.getNumero());
         cancha.setPrecio(request.getPrecio());
         cancha.setSede(sedeRepository.findById(request.getSedeId()).orElse(null));

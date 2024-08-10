@@ -1,5 +1,6 @@
 package com.cibertec.pi.rest.controller;
 
+import com.cibertec.pi.constant.TipoCanchaEnum;
 import com.cibertec.pi.rest.request.CrearCanchaRequest;
 import com.cibertec.pi.rest.response.CanchaResponse;
 import com.cibertec.pi.rest.service.CanchaService;
@@ -71,6 +72,12 @@ public class CanchaController {
     @DeleteMapping("/{id}")
     public ResponseEntity listarCancha(@PathVariable("id") Long id) {
         return canchaService.eliminarCancha(id);
+    }
+
+
+    @GetMapping("tipoCancha")
+    public ResponseEntity<TipoCanchaEnum[]> getTiposCancha() {
+        return ResponseEntity.ok(TipoCanchaEnum.values());
     }
 
 }
