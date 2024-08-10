@@ -64,11 +64,14 @@ public class CanchaService {
         if (cancha == null) {
             return _Respuestas.getErrorResult("El cancha no existe");
         }
+        // Actualiza solo los campos que se han enviado en el request
+        cancha.setTipoCancha(request.getTipoCancha()); // Asegúrate de que esté en el request
         cancha.setNumero(request.getNumero());
         cancha.setPrecio(request.getPrecio());
+        cancha.setSede(sedeRepository.findById(request.getSedeId()).orElse(null));
         cancha.setDisHrInicio(request.getDisHrInicio());
         cancha.setDisHrFin(request.getDisHrFin());
-        cancha.setEstado(true);
+        // No cambies el estado aquí a menos que sea parte del request
         cancha = canchaRepository.save(cancha);
         return ResponseEntity.ok(new CanchaResponse(cancha));
     }
