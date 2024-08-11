@@ -37,6 +37,9 @@ public class CanchaResponse {
     @JsonProperty("dis_hr_fin")
     private Integer disHrFin;
 
+    @JsonProperty("estado")
+    private Boolean estado;
+
     public CanchaResponse(Cancha cancha) {
         this.id = cancha.getId();
         this.tipoCancha = cancha.getTipoCancha();
@@ -45,5 +48,6 @@ public class CanchaResponse {
         this.sedeId = cancha.getSede().getId();
         this.disHrInicio = cancha.getDisHrInicio();
         this.disHrFin = cancha.getDisHrFin();
+        this.estado = cancha.getHabilitado();
     }
 }

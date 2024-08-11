@@ -30,7 +30,6 @@ public class CanchaService {
             return _Respuestas.getErrorResult("Las horas de disponibilidad estan mal ingresadas");
         }
 
-
         Cancha cancha = new Cancha();
         cancha.setTipoCancha(request.getTipoCancha());
         cancha.setNumero(request.getNumero());
@@ -39,6 +38,7 @@ public class CanchaService {
         cancha.setDisHrInicio(request.getDisHrInicio());
         cancha.setDisHrFin(request.getDisHrFin());
         cancha.setEstado(true);
+        cancha.setHabilitado(true);
         cancha = canchaRepository.save(cancha);
 
         return ResponseEntity.ok(new CanchaResponse(cancha));

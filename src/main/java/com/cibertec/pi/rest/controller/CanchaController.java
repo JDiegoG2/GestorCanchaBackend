@@ -76,6 +76,10 @@ public class CanchaController {
             @ApiResponse(responseCode = "200", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = GenericBean.class))}),
             @ApiResponse(responseCode = "400", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = GenericBean.class))})
     })
+    @DeleteMapping("/{id}")
+    public ResponseEntity eliminarCancha(@PathVariable("id") Long id) {
+        return canchaService.eliminarCancha(id);
+    }
 
     @PatchMapping("/estado/{id}")
     public ResponseEntity actualizarEstadoCancha(@PathVariable("id") Long id, @RequestBody Map<String, Object> request) {
@@ -84,7 +88,7 @@ public class CanchaController {
             return _Respuestas.getErrorResult("La cancha no existe");
         }
         Boolean nuevoEstado = (Boolean) request.get("estado");
-        cancha.setEstado(nuevoEstado);
+        cancha.setHabilitado(nuevoEstado);
         cancha = canchaRepository.save(cancha);
         return ResponseEntity.ok(new CanchaResponse(cancha));
     }
