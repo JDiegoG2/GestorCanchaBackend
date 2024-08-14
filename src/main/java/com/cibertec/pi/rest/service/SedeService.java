@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,7 +17,7 @@ public class SedeService {
     private final SedeRepository sedeRepository;
 
     public List<Sede> getSedes() {
-        return sedeRepository.findAllByEstadoIsTrue();
+        return sedeRepository.findAll();
     }
 
     public ResponseEntity getSede(Long id) {
@@ -28,7 +29,6 @@ public class SedeService {
     }
 
     public Sede save(Sede sede) {
-        sede.setEstado(true);
         return sedeRepository.save(sede);
     }
 
@@ -53,5 +53,8 @@ public class SedeService {
         sedeRepository.save(sede);
 
         return ResponseEntity.ok(sede);
+    }
+    public Optional<Sede> findById(Long id) {
+        return sedeRepository.findById(id);
     }
 }

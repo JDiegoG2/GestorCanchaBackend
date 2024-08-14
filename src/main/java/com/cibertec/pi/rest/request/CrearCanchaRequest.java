@@ -47,4 +47,7 @@ public class CrearCanchaRequest {
     @Max(value = 24, message = "Valor maximo no debe ser mayor a 24")
     @JsonProperty("dis_hr_fin")
     private Integer disHrFin;
+
+    @JsonProperty("estado")
+    private boolean estado;
 }

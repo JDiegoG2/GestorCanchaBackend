@@ -48,6 +48,7 @@ public class CanchaResponse {
         this.sedeId = cancha.getSede().getId();
         this.disHrInicio = cancha.getDisHrInicio();
         this.disHrFin = cancha.getDisHrFin();
-        this.estado = cancha.getHabilitado();
+        this.estado = cancha.getEstado();
+
     }
 }

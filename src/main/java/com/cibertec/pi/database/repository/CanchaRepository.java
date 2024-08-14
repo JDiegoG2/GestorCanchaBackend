@@ -8,5 +8,5 @@ import java.util.List;
 public interface CanchaRepository extends JpaRepository<Cancha, Long> {
     Cancha findByNumero(String numero);
 
-    List<Cancha> findAllByEstadoIsTrue();
+
 }

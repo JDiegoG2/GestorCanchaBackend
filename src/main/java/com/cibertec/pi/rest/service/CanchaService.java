@@ -37,15 +37,13 @@ public class CanchaService {
         cancha.setSede(sedeRepository.findById(request.getSedeId()).orElse(null));
         cancha.setDisHrInicio(request.getDisHrInicio());
         cancha.setDisHrFin(request.getDisHrFin());
-        cancha.setEstado(true);
-        cancha.setHabilitado(true);
         cancha = canchaRepository.save(cancha);
 
         return ResponseEntity.ok(new CanchaResponse(cancha));
     }
 
     public ResponseEntity listarCancha() {
-        List<Cancha> canchaList = canchaRepository.findAllByEstadoIsTrue();
+        List<Cancha> canchaList = canchaRepository.findAll();
         List<CanchaResponse> responses = new ArrayList<>();
         canchaList.forEach(bean -> responses.add(new CanchaResponse(bean)));
         return ResponseEntity.ok(responses);
@@ -82,7 +80,7 @@ public class CanchaService {
             return _Respuestas.getErrorResult("El cancha no existe");
         }
         cancha.setEstado(false);
-        cancha = canchaRepository.save(cancha);
+        canchaRepository.save(cancha);
         return _Respuestas.getSuccessResult();
     }
 }

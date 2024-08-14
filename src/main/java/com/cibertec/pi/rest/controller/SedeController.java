@@ -1,6 +1,7 @@
 package com.cibertec.pi.rest.controller;
 
 
+import com.cibertec.pi.database.entidad.Cancha;
 import com.cibertec.pi.database.entidad.Sede;
 import com.cibertec.pi.rest.service.SedeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,10 +10,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/sede")
@@ -21,6 +24,7 @@ import java.util.List;
 public class SedeController {
 
     private final SedeService sedeService;
+
 
 
     @Operation(summary = "Listar todas las sedes")
@@ -73,5 +77,26 @@ public class SedeController {
     })
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         return sedeService.delete(id);
+    }
+
+    @PatchMapping("/estado/{id}")
+    public ResponseEntity<?> actualizarEstadoSede(@PathVariable("id") Long id, @RequestBody Map<String, Object> request) {
+        Sede sede = sedeService.findById(id).orElse(null); // Busca la sede por ID
+        if (sede == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La sede no existe");
+        }
+
+        // Obtiene el estado desde el request y asegura que no sea null
+        Integer estadoValue = (Integer) request.get("estado");
+        if (estadoValue == null) {
+            return ResponseEntity.badRequest().body("El estado es requerido");
+        }
+
+        // Convierte el valor entero a booleano
+        Boolean nuevoEstado = (estadoValue == 1);
+        sede.setEstado(nuevoEstado); // Actualiza el estado de la sede
+        sede = sedeService.save(sede); // Guarda los cambios
+
+        return ResponseEntity.ok(sede);
     }
 }

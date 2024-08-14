@@ -42,9 +42,6 @@ public class Cancha {
     @Column(name = "dis_hr_fin")
     private Integer disHrFin;
 
-    @Column(name = "habilitado")
-    private Boolean habilitado;
-
     @Column(name = "estado")
     private Boolean estado;
 

@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -76,21 +77,26 @@ public class CanchaController {
             @ApiResponse(responseCode = "200", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = GenericBean.class))}),
             @ApiResponse(responseCode = "400", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = GenericBean.class))})
     })
-    @DeleteMapping("/{id}")
-    public ResponseEntity eliminarCancha(@PathVariable("id") Long id) {
-        return canchaService.eliminarCancha(id);
-    }
 
     @PatchMapping("/estado/{id}")
     public ResponseEntity actualizarEstadoCancha(@PathVariable("id") Long id, @RequestBody Map<String, Object> request) {
         Cancha cancha = canchaRepository.findById(id).orElse(null);
         if (cancha == null) {
-            return _Respuestas.getErrorResult("La cancha no existe");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La cancha no existe");
         }
-        Boolean nuevoEstado = (Boolean) request.get("estado");
-        cancha.setHabilitado(nuevoEstado);
+
+        // Obtiene el estado desde el request y asegura que no sea null
+        Integer estadoValue = (Integer) request.get("estado");
+        if (estadoValue == null) {
+            return ResponseEntity.badRequest().body("El estado es requerido");
+        }
+
+        // Convierte el valor entero a booleano
+        Boolean nuevoEstado = (estadoValue == 1);
+        cancha.setEstado(nuevoEstado);
         cancha = canchaRepository.save(cancha);
-        return ResponseEntity.ok(new CanchaResponse(cancha));
+
+        return ResponseEntity.ok(cancha);
     }
 
 
