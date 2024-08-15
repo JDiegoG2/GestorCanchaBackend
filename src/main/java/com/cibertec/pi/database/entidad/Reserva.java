@@ -46,7 +46,7 @@ public class Reserva {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estado")
-    private EstadoReservaEnum estado    ;
+    private EstadoReservaEnum estado;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")

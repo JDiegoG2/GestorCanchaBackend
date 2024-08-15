@@ -1,6 +1,8 @@
 package com.cibertec.pi.rest.controller;
 
+import com.cibertec.pi.rest.request.CrearReservaRequest;
 import com.cibertec.pi.rest.response.CanchaResponse;
+import com.cibertec.pi.rest.response.ReservaResponse;
 import com.cibertec.pi.rest.service.ReservaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -23,5 +25,15 @@ public class ReservaController {
     @GetMapping("/listar_horario/{cancha_id}/{fecha}")
     public List<Integer> listarHorarios(@PathVariable("cancha_id") Long cancha_id, @PathVariable("fecha") String fecha) {
         return reservaService.verHorasDisponibles(cancha_id, fecha);
+    }
+
+    @PostMapping
+    public ReservaResponse crearReserva(CrearReservaRequest request){
+        return reservaService.crearReserva(request);
+    }
+
+    @GetMapping("/{reserva_id}")
+    public ReservaResponse detalleReserva(@PathVariable("reserva_id") Long reservaId){
+        return reservaService.obtenerReserva(reservaId);
     }
 }
