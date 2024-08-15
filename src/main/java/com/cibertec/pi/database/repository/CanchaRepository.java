@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface CanchaRepository extends JpaRepository<Cancha, Long> {
-    Cancha findByNumero(String numero);
+    Cancha findByNumeroAndSedeId(String numero, Long sedeId);
+
+    List<Cancha> findByEstadoIsTrueAndSedeId(Long sedeId);
 
 
 }

@@ -23,7 +23,7 @@ public class CanchaService {
     private final SedeRepository sedeRepository;
 
     public ResponseEntity crearCancha(CrearCanchaRequest request) {
-        if (canchaRepository.findByNumero(request.getNumero()) != null) {
+        if (canchaRepository.findByNumeroAndSedeId(request.getNumero(), request.getSedeId()) != null) {
             return _Respuestas.getErrorResult("El numero de cancha ya existe");
         }
         if (request.getDisHrInicio().equals(request.getDisHrFin()) || request.getDisHrInicio() > request.getDisHrFin()) {
