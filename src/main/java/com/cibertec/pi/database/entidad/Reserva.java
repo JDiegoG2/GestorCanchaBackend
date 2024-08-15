@@ -32,7 +32,7 @@ public class Reserva {
     private LocalDate fechaReserva;
 
     @Column(name = "hora_reserva")
-    private String horaReserva;
+    private Integer horaReserva;
 
     @ManyToOne
     @JoinColumn(name = "cancha_id")
