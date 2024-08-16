@@ -28,7 +28,7 @@ public class ReservaController {
     }
 
     @PostMapping
-    public ReservaResponse crearReserva(CrearReservaRequest request){
+    public ReservaResponse crearReserva(@RequestBody CrearReservaRequest request){
         return reservaService.crearReserva(request);
     }
 
