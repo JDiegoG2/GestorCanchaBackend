@@ -1,6 +1,7 @@
 package com.cibertec.pi.database.entidad;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,7 +35,7 @@ public class Ubigeo {
     @Column(name = "codigo")
     private String codigo;// Código de ubigeo (6 dígitos: 2 para depto, 2 para provincia, 2 para distrito)
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "ubigeo")  // Inverse side of the relation
     private List<Sede> sedes;
 }

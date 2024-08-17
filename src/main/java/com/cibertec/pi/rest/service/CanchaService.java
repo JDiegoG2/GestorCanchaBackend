@@ -37,6 +37,7 @@ public class CanchaService {
         cancha.setSede(sedeRepository.findById(request.getSedeId()).orElse(null));
         cancha.setDisHrInicio(request.getDisHrInicio());
         cancha.setDisHrFin(request.getDisHrFin());
+        cancha.setEstado(true);
         cancha = canchaRepository.save(cancha);
 
         return ResponseEntity.ok(new CanchaResponse(cancha));
