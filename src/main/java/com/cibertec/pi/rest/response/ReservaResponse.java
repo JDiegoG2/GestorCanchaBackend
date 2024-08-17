@@ -40,6 +40,9 @@ public class ReservaResponse {
     @JsonProperty("cliente")
     private String cliente;
 
+    @JsonProperty("pdf_url")
+    private String pdfUrl;
+
     // Constructor que acepta un objeto Reserva
     public ReservaResponse(Reserva reserva) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -57,7 +60,7 @@ public class ReservaResponse {
     }
 
     // Constructor que acepta parámetros individuales
-    public ReservaResponse(Long id, String fechaCreacion, String fechaReserva, Integer horaReserva, String cancha, String observacion, Double importe, String estado, String cliente) {
+    public ReservaResponse(Long id, String fechaCreacion, String fechaReserva, Integer horaReserva, String cancha, String observacion, Double importe, String estado, String cliente, String pdfUrl) {
         this.id = id;
         this.fechaCreacion = fechaCreacion;
         this.fechaReserva = fechaReserva;
@@ -67,5 +70,6 @@ public class ReservaResponse {
         this.importe = importe;
         this.estado = estado;
         this.cliente = cliente;
+        this.pdfUrl = pdfUrl;
     }
 }
