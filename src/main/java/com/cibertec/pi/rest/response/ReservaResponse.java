@@ -12,7 +12,6 @@ import java.time.format.DateTimeFormatter;
 @Data
 @Builder
 public class ReservaResponse {
-
     @Id
     @JsonProperty("id")
     private Long id;
@@ -41,6 +40,7 @@ public class ReservaResponse {
     @JsonProperty("cliente")
     private String cliente;
 
+    // Constructor que acepta un objeto Reserva
     public ReservaResponse(Reserva reserva) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -54,5 +54,18 @@ public class ReservaResponse {
         this.importe = reserva.getImporte();
         this.estado = reserva.getEstado().name();
         this.cliente = reserva.getCliente().getPersona().getNombreCompleto();
+    }
+
+    // Constructor que acepta parámetros individuales
+    public ReservaResponse(Long id, String fechaCreacion, String fechaReserva, Integer horaReserva, String cancha, String observacion, Double importe, String estado, String cliente) {
+        this.id = id;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaReserva = fechaReserva;
+        this.horaReserva = horaReserva;
+        this.cancha = cancha;
+        this.observacion = observacion;
+        this.importe = importe;
+        this.estado = estado;
+        this.cliente = cliente;
     }
 }

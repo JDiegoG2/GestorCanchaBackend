@@ -57,4 +57,9 @@ public class SedeService {
     public Optional<Sede> findById(Long id) {
         return sedeRepository.findById(id);
     }
+
+    // Método para listar sedes activas
+    public List<Sede> listarSedesActivas() {
+        return sedeRepository.findByEstado(true);
+    }
 }

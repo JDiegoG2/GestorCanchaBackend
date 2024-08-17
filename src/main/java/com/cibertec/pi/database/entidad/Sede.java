@@ -29,4 +29,9 @@ public class Sede {
 
     @Column(name = "estado")
     private Boolean estado;
+
+    @ManyToOne
+    @JoinColumn(name = "ubigeo_id", referencedColumnName = "id")
+    private Ubigeo ubigeo;
+
 }
