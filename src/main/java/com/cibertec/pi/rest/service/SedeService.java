@@ -2,7 +2,9 @@ package com.cibertec.pi.rest.service;
 
 import com.cibertec.pi.constant._Respuestas;
 import com.cibertec.pi.database.entidad.Sede;
+import com.cibertec.pi.database.entidad.Ubigeo;
 import com.cibertec.pi.database.repository.SedeRepository;
+import com.cibertec.pi.database.repository.UbigeoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import java.util.Optional;
 public class SedeService {
 
     private final SedeRepository sedeRepository;
+    private final UbigeoRepository ubigeoRepository;
 
     public List<Sede> getSedes() {
         return sedeRepository.findAll();
@@ -29,6 +32,8 @@ public class SedeService {
     }
 
     public Sede save(Sede sede) {
+        Ubigeo ubigeo = ubigeoRepository.findById(Optional.ofNullable(sede.getUbigeo()).map(Ubigeo::getId).orElse(0L)).orElse(null);
+        sede.setUbigeo(ubigeo);
         return sedeRepository.save(sede);
     }
 
@@ -50,11 +55,17 @@ public class SedeService {
         sede.setNombre(update.getNombre());
         sede.setDireccion(update.getDireccion());
         sede.setTelefono(update.getTelefono());
+        sede.setUbigeo(ubigeoRepository.findById(Optional.ofNullable(update.getUbigeo()).map(Ubigeo::getId).orElse(0L)).orElse(null));
         sedeRepository.save(sede);
 
         return ResponseEntity.ok(sede);
     }
     public Optional<Sede> findById(Long id) {
         return sedeRepository.findById(id);
+    }
+
+    // Método para listar sedes activas
+    public List<Sede> listarSedesActivas() {
+        return sedeRepository.findByEstado(true);
     }
 }

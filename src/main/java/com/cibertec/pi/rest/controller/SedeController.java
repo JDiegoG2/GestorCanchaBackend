@@ -48,15 +48,12 @@ public class SedeController {
     }
 
     @PostMapping("/guardar")
-    @Operation(summary = "Crear una nueva sede")
-    @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Sede creada correctamente", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Sede.class))}),
-            @ApiResponse(responseCode = "400", description = "Solicitud incorrecta", content = @Content)
-    })
     public ResponseEntity<Sede> crear(@RequestBody Sede sede) {
+        System.out.println("Recibido: " + sede); // Log del objeto recibido
         Sede nuevaSede = sedeService.save(sede);
         return ResponseEntity.status(201).body(nuevaSede);
     }
+
 
     @PutMapping({"/{id}"})
     @Operation(summary = "Actualizar una sede existente")
@@ -98,5 +95,13 @@ public class SedeController {
         sede = sedeService.save(sede); // Guarda los cambios
 
         return ResponseEntity.ok(sede);
+
+
+    }
+
+    // Endpoint para listar solo las sedes activas
+    @GetMapping("/activas")
+    public List<Sede> listarSedesActivas() {
+        return sedeService.listarSedesActivas();
     }
 }
